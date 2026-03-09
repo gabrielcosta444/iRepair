@@ -25,7 +25,7 @@ function NewServiceForm ({onAddService}: NewServiceFormProps){
     }
 
     return(
-        <div className="bg-white p-6 rounded-xl shadow-md border border-slate-200">
+    <div className="bg-white p-6 rounded-xl shadow-md border border-slate-200">
       <h2 className="text-xl font-bold text-slate-800 mb-4">
         Nova Ordem de Serviço
       </h2>
@@ -58,7 +58,7 @@ function NewServiceForm ({onAddService}: NewServiceFormProps){
         <button
           type="button"
           onClick={handleSubmit}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition"
         >
           Salvar
         </button>
