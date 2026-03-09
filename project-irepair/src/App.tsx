@@ -18,9 +18,7 @@ function App() {
   }
   return (
       <div>
-        <div className='flex'>
           <Header />
-        </div>
       <main className="flex flex-col gap-3">
         <div className='flex justify-center py-6'>
           <NewServiceForm onAddService = {addService} />
