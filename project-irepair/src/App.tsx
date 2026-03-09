@@ -13,9 +13,21 @@ export interface ServiceOrder{
 
 function App() {
   const [services, setServices] = useState <ServiceOrder[]> ([]);
+
   function addService(newService: ServiceOrder){
     setServices ([... services, newService]);
   }
+
+  function finalizeService(id: number){
+    setServices((prevServices) =>
+    prevServices.map((service) =>
+      service.id === id
+        ? { ...service, status: "finalizado" }
+        : service
+    )
+    );
+  } 
+
   return (
       <div>
           <Header />
@@ -24,7 +36,7 @@ function App() {
           <NewServiceForm onAddService = {addService} />
         </div>
           {services.map((service) => (
-          <ServiceCard key = {service.id} service = {service}/>
+          <ServiceCard key = {service.id} service = {service} onFinalize = {finalizeService}/>
         ))}
       </main>
       </div>
