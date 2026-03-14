@@ -35,9 +35,11 @@ function App() {
         <div className='flex justify-center py-6'>
           <NewServiceForm onAddService = {addService} />
         </div>
+        <div className='px-5'>
           {services.map((service) => (
           <ServiceCard key = {service.id} service = {service} onFinalize = {finalizeService}/>
         ))}
+        </div>
       </main>
       </div>
   )
