@@ -64,7 +64,7 @@ const ServiceOrdersPage = () => {
         <NewServiceForm onCreateService={handleCreateService} />
       </div>
 
-      <div>
+      <div className='flex flex-col gap-4'>
         {services.map((service) => (
           <ServiceCard
             key={service.id}

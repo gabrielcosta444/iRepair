@@ -51,7 +51,7 @@ const ClientsPage = () => {
         <NewClientForm onCreateClient={handleCreateClient} />
       </div>
 
-      <div>
+      <div className='flex flex-col gap-4'>
         {clients.map((client) => (
           <ClientCard
             key={client.id}
