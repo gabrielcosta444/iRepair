@@ -1,0 +1,10 @@
+# .gitignore (raiz)
+node_modules/
+dist/
+.env
+.env.local
+.env.*.local
+
+# IDEs
+.vscode/
+.idea/
