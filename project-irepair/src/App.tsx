@@ -1,47 +1,25 @@
-import { useState } from 'react';
-import Header from './components/Header';
-import NewServiceForm from './components/NewServiceForm'; 
-import ServiceCard from './components/ServiceCard';
+import { BrowserRouter, Routes, Route } from 'react-router';
+import MainLayout from './components/MainLayout';
+import DashboardPage from './pages/DashboardPage';
+import ClientsPage from './pages/ClientsPage';
+import ServiceOrdersPage from './pages/ServiceOrdersPage';
 
-export interface ServiceOrder{
-  id: number;
-  cliente: string;
-  modeloAparelho: string;
-  defeito: string;
-  status: "aberto" | "finalizado";
-}
 
-function App() {
-  const [services, setServices] = useState <ServiceOrder[]> ([]);
+const App = () => {
 
-  function addService(newService: ServiceOrder){
-    setServices ([... services, newService]);
-  }
-
-  function finalizeService(id: number){
-    setServices((prevServices) =>
-    prevServices.map((service) =>
-      service.id === id
-        ? { ...service, status: "finalizado" }
-        : service
-    )
-    );
-  } 
 
   return (
-      <div>
-          <Header />
-      <main className="flex flex-col gap-3">
-        <div className='flex justify-center py-6'>
-          <NewServiceForm onAddService = {addService} />
-        </div>
-          {services.map((service) => (
-          <ServiceCard key = {service.id} service = {service} onFinalize = {finalizeService}/>
-        ))}
-      </main>
-      </div>
-  )
-}
+    <BrowserRouter>
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<DashboardPage />} />
+          <Route path="/clients" element={<ClientsPage />} />
+          <Route path="/service-orders" element={<ServiceOrdersPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
 export default App
 
