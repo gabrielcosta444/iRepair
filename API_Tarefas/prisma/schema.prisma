@@ -7,6 +7,12 @@ datasource db {
   provider = "mysql"
 }
 
+model Usuario {
+  id        Int      @id @default(autoincrement())
+  email String @unique
+  senha String
+}
+
 model Task {
   id        Int      @id @default(autoincrement())
   title     String
@@ -14,3 +20,5 @@ model Task {
   completed Boolean  @default(false)
   createdAt DateTime @default(now())
 }
+
+
