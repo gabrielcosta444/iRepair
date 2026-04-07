@@ -8,3 +8,5 @@ dist/
 # IDEs
 .vscode/
 .idea/
+
+API_Tarefas/src/generated/prisma
