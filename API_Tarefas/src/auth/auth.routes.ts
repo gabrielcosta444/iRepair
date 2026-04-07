@@ -1,7 +1,7 @@
 // src/modules/auth/auth.routes.ts
 import { Router } from 'express'
 import { AuthController } from './auth.controller'
-import { authMiddleware } from '../../middlewares/authMiddleware'
+import { authMiddleware } from '../middlewares/authMiddleware'
 
 const authRoutes = Router()
 const authController = new AuthController()
