@@ -29,7 +29,7 @@ function NewServiceForm ({onCreateService}: NewServiceFormProps){
           return;
         }
         const dataService: CreateServiceOrderData = {
-            clientId: clientId,
+            client_id: clientId,
             device: device,
             issue: issue
         };
