@@ -1,4 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router';
+import { AuthProvider } from './contexts/AuthContext'
+import { PrivateRoute } from './routes/PrivateRoute';
+import { Login } from './pages/Login';
 import MainLayout from './components/MainLayout';
 import DashboardPage from './pages/DashboardPage';
 import ClientsPage from './pages/ClientsPage';
@@ -10,13 +13,18 @@ const App = () => {
 
   return (
     <BrowserRouter>
+      <AuthProvider>
       <Routes>
-        <Route element={<MainLayout />}>
-          <Route path="/" element={<DashboardPage />} />
-          <Route path="/clients" element={<ClientsPage />} />
-          <Route path="/service-orders" element={<ServiceOrdersPage />} />
+        <Route path='/login' element={<Login />}>
+        <Route element={<PrivateRoute />}>
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<DashboardPage />} />
+            <Route path="/clients" element={<ClientsPage />} />
+            <Route path="/service-orders" element={<ServiceOrdersPage />} />
+          </Route>
         </Route>
       </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 };

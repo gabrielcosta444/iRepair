@@ -1,39 +1,25 @@
 import { api } from './api';
-import type { ServiceOrder, ServiceOrderApi, CreateServiceOrderData } from '../types';
+import type { ServiceOrder, CreateServiceOrderData } from '../types';
 
-type ApiResponse<T> = {
-  data: T;
-};
-
-function mapServiceOrder(service: ServiceOrderApi): ServiceOrder {
-  return {
-    id: service.id,
-    clientId: service.client_id,
-    device: service.device,
-    issue: service.issue,
-    status: service.status,
-    created_at: service.created_at,
-  };
-}
 
 export async function getAllServices(): Promise<ServiceOrder[]> {
-  const response = await api.get<ApiResponse<ServiceOrderApi[]>>('/service-orders');
-  return response.data.data.map(mapServiceOrder);
+  const response = await api.get<ServiceOrder[]>('/service-orders');
+  return response.data;
 }
 
 export async function createService(data: CreateServiceOrderData): Promise<ServiceOrder> {
-  const response = await api.post<ApiResponse<ServiceOrderApi>>('/service-orders', data);
-  return mapServiceOrder(response.data.data);
+  const response = await api.post<ServiceOrder>('/service-orders', data);
+  return response.data;
 }
 
 export async function getService(id: number): Promise<ServiceOrder> {
-  const response = await api.get<ApiResponse<ServiceOrderApi>>(`/service-orders/${id}`);
-  return mapServiceOrder(response.data.data);
+  const response = await api.get<ServiceOrder>(`/service-orders/${id}`);
+  return response.data;
 }
 
 export async function updateService(id: number, data: CreateServiceOrderData): Promise<ServiceOrder> {
-  const response = await api.put<ApiResponse<ServiceOrderApi>>(`/service-orders/${id}`, data);
-  return mapServiceOrder(response.data.data);
+  const response = await api.put<ServiceOrder>(`/service-orders/${id}`, data);
+  return response.data;
 }
 
 export async function deleteService(id: number): Promise<void> {
