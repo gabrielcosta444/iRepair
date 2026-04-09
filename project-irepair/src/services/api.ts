@@ -11,8 +11,15 @@ export const api = axios.create({
 api.interceptors.response.use(
   response => response,
   error => {
-    if (error.response?.status === 401) {
-      window.location.href = '/login'
+    const requestUrl = String(error.config?.url ?? '')
+    const isAuthRequest = requestUrl.startsWith('/auth/')
+
+    if (
+      error.response?.status === 401 &&
+      !isAuthRequest &&
+      window.location.pathname !== '/login'
+    ) {
+      window.location.replace('/login')
     }
     return Promise.reject(error)
   }
