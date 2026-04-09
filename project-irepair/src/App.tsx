@@ -9,25 +9,26 @@ import ServiceOrdersPage from './pages/ServiceOrdersPage';
 
 
 const App = () => {
-
-
   return (
     <BrowserRouter>
       <AuthProvider>
-      <Routes>
-        <Route path='/login' element={<Login />}>
-        <Route element={<PrivateRoute />}>
-          <Route element={<MainLayout />}>
-            <Route path="/" element={<DashboardPage />} />
-            <Route path="/clients" element={<ClientsPage />} />
-            <Route path="/service-orders" element={<ServiceOrdersPage />} />
+        <Routes>
+          {/* Rota pública */}
+          <Route path="/login" element={<Login />} />
+
+          {/* Rotas protegidas — envolvem o layout já existente */}
+          <Route element={<PrivateRoute />}>
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<DashboardPage />} />
+              <Route path="/clients" element={<ClientsPage />} />
+              <Route path="/service-orders" element={<ServiceOrdersPage />} />
+            </Route>
           </Route>
-        </Route>
-      </Routes>
+        </Routes>
       </AuthProvider>
     </BrowserRouter>
-  );
-};
+  )
+}
 
 export default App
 
