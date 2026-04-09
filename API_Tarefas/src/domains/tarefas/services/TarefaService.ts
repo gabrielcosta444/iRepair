@@ -2,24 +2,26 @@ import { prisma } from "../../../config/prismaClient";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 interface ITarefa{
-    title: string;
-    description: string;
+    client_id: number;
+    device: string;
+    issue: string;
 }
 
 
 class TarefaService{
 
-    async createTask({title, description}: ITarefa){
+    async createTask({device, issue, client_id}: ITarefa){
 
-        if(!title){
-            throw new Error ('Título da tarefa é obrigatório.');
+        if(!device || !issue || !client_id){
+            throw new Error ('Campos faltantes.');
         }
 
         try{
             return await prisma.task.create({
                 data: {
-                    title: title,
-                    description: description
+                    device: device,
+                    issue: issue,
+                    client_id: client_id
                 }
             })
         } catch(error){
@@ -48,11 +50,12 @@ class TarefaService{
         }
     }
 
-    async editTask(id: number, {title, description}: ITarefa){
+    async editTask(id: number, {device, issue, client_id}: ITarefa){
         try{
             return await prisma.task.update({ where: {id}, data: {
-                title: title,
-                description: description
+                device: device,
+                issue: issue,
+                client_id: client_id
             } })
         }catch(error){
             if(error instanceof PrismaClientKnownRequestError && error.code === 'P2025'){

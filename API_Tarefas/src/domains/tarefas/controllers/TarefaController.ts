@@ -5,10 +5,10 @@ class TarefaController {
   
   async createTask(req: Request, res: Response) {
     try {
-      const { title, description } = req.body;
+      const { client_id, device, issue } = req.body;
       
       const service = new TarefaService();
-      const tarefa = await service.createTask({ title, description });
+      const tarefa = await service.createTask({ client_id, device, issue });
       
       return res.status(201).json(tarefa);
       
@@ -37,9 +37,9 @@ class TarefaController {
   async editTask(req: Request, res: Response){
     try{
         const id = Number(req.params.id);
-        const { title, description} = req.body;
+        const { client_id, device, issue } = req.body;
         const service = new TarefaService();
-        const tarefa = await service.editTask(id, { title, description });
+        const tarefa = await service.editTask(id, { client_id, device, issue });
         return res.status(200).json(tarefa);
     } catch (error){
         return res.status(404).json({ erro: (error as Error).message });

@@ -15,10 +15,19 @@ model Usuario {
 
 model Task {
   id        Int      @id @default(autoincrement())
-  title     String
-  description String
-  completed Boolean  @default(false)
-  createdAt DateTime @default(now())
+  client_id Int 
+  device String
+  issue String
+  status String  @default("Open")
+  created_at DateTime @default(now())
+}
+
+model Client {
+  id Int @id @default(autoincrement())
+  name String
+  phone String 
+  email String
+  created_at DateTime @default(now())
 }
 
 
