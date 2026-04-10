@@ -1,14 +1,13 @@
 import { useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router'
-import { useAuth } from '../contexts/AuthContext'
+import { api } from '../services/api'
 
-export function Login() {
+export function Register() {
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
   const [erro, setErro] = useState<string | null>(null)
   const [carregando, setCarregando] = useState(false)
 
-  const { login } = useAuth()
   const navigate = useNavigate()
 
   async function handleSubmit(event?: FormEvent<HTMLFormElement>) {
@@ -17,10 +16,10 @@ export function Login() {
     setCarregando(true)
 
     try {
-      await login(email, senha)
-      navigate('/')
+      await api.post('/auth/register', { email, senha })
+      navigate('/login')
     } catch (err: unknown) {
-      setErro(err instanceof Error ? err.message : 'Erro ao fazer login.')
+      setErro(err instanceof Error ? err.message : 'Erro ao realizar cadastro.')
     } finally {
       setCarregando(false)
     }
@@ -34,7 +33,7 @@ export function Login() {
           onSubmit={handleSubmit}
           className="w-full max-w-md rounded-xl border border-slate-200 bg-white p-6 shadow-md"
         >
-          <h2 className="mb-4 text-xl font-bold text-slate-800">Login</h2>
+          <h2 className="mb-4 text-xl font-bold text-slate-800">Cadastro</h2>
 
           <div className="flex flex-col gap-3">
             <input
@@ -59,13 +58,13 @@ export function Login() {
               disabled={carregando}
               className="rounded-lg bg-blue-500 py-2 font-semibold text-white transition hover:bg-blue-700"
             >
-              {carregando ? 'Entrando...' : 'Entrar'}
+              {carregando ? 'Cadastrando...' : 'Cadastrar'}
             </button>
             <Link
-              to="/register"
+              to="/login"
               className="rounded-lg border border-blue-500 py-2 text-center font-semibold text-blue-600 transition hover:bg-blue-50"
             >
-              Cadastre-se
+              Voltar para login
             </Link>
           </div>
         </form>

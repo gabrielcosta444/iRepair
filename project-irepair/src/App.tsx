@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router';
 import { AuthProvider } from './contexts/AuthContext'
 import { PrivateRoute } from './routes/PrivateRoute';
 import { Login } from './pages/Login';
+import { Register } from './pages/Register';
 import MainLayout from './components/MainLayout';
 import DashboardPage from './pages/DashboardPage';
 import ClientsPage from './pages/ClientsPage';
@@ -15,6 +16,7 @@ const App = () => {
         <Routes>
           {/* Rota pública */}
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
           {/* Rotas protegidas — envolvem o layout já existente */}
           <Route element={<PrivateRoute />}>
