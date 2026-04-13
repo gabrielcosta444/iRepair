@@ -1,9 +1,26 @@
 import axios from "axios";
 
 export const api = axios.create({
-    baseURL: 'https://trainee.fidelis.workers.dev/api',
+    baseURL: import.meta.env.VITE_API_URL,
+    withCredentials: true,
     headers:{
-        'Authorization': 'Bearer 812d2f7b-ec6e-416a-be91-cc87f7b364c1',
         'Content-Type': 'application/json',
     },
-});
+})
+
+api.interceptors.response.use(
+  response => response,
+  error => {
+    const requestUrl = String(error.config?.url ?? '')
+    const isAuthRequest = requestUrl.startsWith('/auth/')
+
+    if (
+      error.response?.status === 401 &&
+      !isAuthRequest &&
+      window.location.pathname !== '/login'
+    ) {
+      window.location.replace('/login')
+    }
+    return Promise.reject(error)
+  }
+)

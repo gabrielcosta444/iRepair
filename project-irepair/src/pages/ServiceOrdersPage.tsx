@@ -70,7 +70,7 @@ const ServiceOrdersPage = () => {
             key={service.id}
             service={service}
             onDeleteService={handleDeleteService}
-            clientName = {getClientName(service.clientId)}
+            clientName = {getClientName(service.client_id)}
           />
         ))}
       </div>

@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Usuario {
+  id        Int      @id @default(autoincrement())
+  email String @unique
+  senha String
+}
+
+model Task {
+  id        Int      @id @default(autoincrement())
+  client_id Int 
+  device String
+  issue String
+  status String  @default("Open")
+  created_at DateTime @default(now())
+}
+
+model Client {
+  id Int @id @default(autoincrement())
+  name String
+  phone String 
+  email String
+  created_at DateTime @default(now())
+}
+
+

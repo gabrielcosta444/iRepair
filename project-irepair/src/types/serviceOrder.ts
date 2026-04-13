@@ -1,14 +1,5 @@
 export interface ServiceOrder {
   id: number;
-  clientId: number;
-  device: string;
-  issue: string;
-  status: 'open';
-  created_at: string;
-}
-
-export interface ServiceOrderApi {
-  id: number;
   client_id: number;
   device: string;
   issue: string;
