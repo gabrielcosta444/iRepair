@@ -9,6 +9,10 @@ if (!process.env.DATABASE_URL) {
   throw new Error("DATABASE_URL não definido nas variáveis de ambiente");
 }
 
+if (!process.env.JWT_EXPIRES_IN) {
+  throw new Error("JWT_EXPIRES_IN não definido nas variáveis de ambiente");
+}
+
 const PORT = Number(process.env.PORT) || 3030;
 
 app.listen(PORT, () => {
