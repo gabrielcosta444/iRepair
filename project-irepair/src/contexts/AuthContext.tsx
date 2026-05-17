@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
+import type { AxiosResponse } from 'axios'
 import { api } from '../services/api'
 
 interface Usuario {
@@ -14,6 +15,10 @@ interface AuthContextType {
   logout: () => Promise<void>
 }
 
+interface AuthResponse {
+  usuario: Usuario
+}
+
 const AuthContext = createContext<AuthContextType | null>(null)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -22,8 +27,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     api
-      .get('/auth/me')
-      .then((res) => setUser(res.data.usuario))
+      .get<AuthResponse>('/auth/me')
+      .then((res: AxiosResponse<AuthResponse>) => setUser(res.data.usuario))
       .catch(() => setUser(null))
       .finally(() => setIsLoading(false))
   }, [])

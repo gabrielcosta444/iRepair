@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { type AxiosError, type AxiosResponse } from "axios";
 
 export const api = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
@@ -9,8 +9,8 @@ export const api = axios.create({
 })
 
 api.interceptors.response.use(
-  response => response,
-  error => {
+  (response: AxiosResponse) => response,
+  (error: AxiosError) => {
     const requestUrl = String(error.config?.url ?? '')
     const isAuthRequest = requestUrl.startsWith('/auth/')
 

@@ -9,7 +9,10 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: 'http://localhost:5173',  // origem exata do seu front-end
+    origin: [
+  'http://localhost:5173',
+  'http://localhost:8080'
+],  // origem exata do seu front-end
     credentials: true,  
 }))
 
